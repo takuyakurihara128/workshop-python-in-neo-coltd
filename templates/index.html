@@ -1,10 +1,33 @@
-<html lang="jp">
-<head>
-    <meta charset="UTF-8">
-</head>
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>社内Todoリスト</title>
+        <style>
+            body { font-family: sans-serif; margin: 2em; }
+            h1 { color: #333; }
+            ul { list-style: none; padding: 0; }
+            li { padding: 0.5em 0; border-bottom: 1px solid #ccc; }
+            form { margin-top: 2em; }
+            input[type="text"] { padding: 0.5em; width: 300px; }
+            input[type="submit"] { padding: 0.5em 1em; }
+        </style>
+    </head>
+    <body>
+        <h1>研修用Todoリスト</h1>
 
-<body class="">
-    <h1>hello django</h1>
-</body>
+        <ul>
+            {% for task in tasks %}
+                <li>{{ task.title }}</li>
+            {% empty %}
+                <li>タスクはまだありません。</li>
+            {% endfor %}
+        </ul>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="新しいタスクを入力">
+            <input type="submit" value="追加">
+        </form>
+    </body>
 </html>
-
